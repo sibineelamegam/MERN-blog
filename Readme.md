@@ -1,6 +1,4 @@
-You're absolutely right\! I missed including the ports for the frontend applications in the README. Here is the updated version with that crucial information added.
 
-I've added a new section at the top to give a quick summary and a new bullet point under the "Frontend" section to explicitly mention the ports.
 
 ````markdown
 # 💻 Full-Stack MERN Blog Application
