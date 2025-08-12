@@ -26,7 +26,6 @@ export const blogListStyles = {
       sm: "calc(50% - 16px)",
       md: "calc(33.33% - 16px)",
     },
-    flexGrow: 1,
     minHeight: 350,
     display: "flex",
     flexDirection: "column",
