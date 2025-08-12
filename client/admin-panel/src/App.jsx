@@ -11,6 +11,7 @@ import Unauthorized from "./pages/Unauthorized";
 import NotFound from "./pages/NotFound";
 import RequiredAuth from "./routes/RequiredAuth";
 import PersistLogin from "./routes/PersistLogin";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -18,12 +19,12 @@ function App() {
       {/* Routes that do NOT use MainLayout (no header, no sidebar) */}
       <Route path="/unauthorized" element={<Unauthorized />} />
       <Route path="*" element={<NotFound />} /> {/* Catch-all for 404 */}
-
       {/* Routes that DO use MainLayout (header, and sidebar for authenticated users) */}
       <Route element={<MainLayout />}>
         {/* Public route that uses MainLayout (for header) */}
         <Route index element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Protected routes */}
         <Route element={<PersistLogin />}>

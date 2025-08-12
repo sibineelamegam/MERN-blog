@@ -1,29 +1,34 @@
+// A robust login controller function
 import User from "../../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const loginUser = async (req, res) => {
+  // CRITICAL FIX: Check if the request body exists before destructuring.
+  if (!req.body) {
+    return res.status(400).json({ message: "Request body is missing." });
+  }
+
   // 1. Extract and trim incoming credentials
   let { email, username, password } = req.body;
   email = email?.trim();
   username = username?.trim();
 
   // 2. Validate required fields
-  if (!email || !username || !password) {
-    return res
-      .status(400)
-      .json({ message: "Email, username, and password are required" });
+  if (!email && !username) {
+    return res.status(400).json({ message: "Email or username is required." });
+  }
+  if (!password) {
+    return res.status(400).json({ message: "Password is required." });
   }
 
   try {
     // 3. Check for existing admin user by email + username
-    const user = await User.findOne({ email, username });
+    const user = await User.findOne({ $or: [{ email }, { username }] });
 
     // If user doesn't exist, reject login
     if (!user) {
-      return res
-        .status(401)
-        .json({ message: "Invalid email, username, or unauthorized access" });
+      return res.status(401).json({ message: "Invalid email, username, or unauthorized access" });
     }
 
     // 4. Verify password
@@ -76,7 +81,7 @@ export const loginUser = async (req, res) => {
 };
 
 /*
-| Cookie Sent On...                | `Strict`  | `Lax`  | `None`  |
+| Cookie Sent On...                 | `Strict`  | `Lax`  | `None`  |
 | -------------------------------- | -------   | -----  | ------  |
 | Same-origin requests             | ✅        | ✅     | ✅      |
 | Cross-origin **GET (top-level)** | ❌        | ✅     | ✅      |
