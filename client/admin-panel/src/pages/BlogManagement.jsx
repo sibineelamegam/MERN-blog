@@ -151,7 +151,7 @@ function BlogManagement() {
                 <TableCell>Author</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Content</TableCell>
-                <TableCell>Image</TableCell>{" "}
+                <TableCell>Image</TableCell>
                 {/* ADDED: Table header for Image */}
                 <TableCell align="right">Actions</TableCell>
               </TableRow>
